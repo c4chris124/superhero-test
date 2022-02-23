@@ -1,41 +1,35 @@
-export const LOADING_HEROS ="LOADING_HEROS"
+export const LOADING_HEROS = "LOADING_HEROS"
 export const HEROS_FAIL = "HEROS_FAIL"
 export const HEROS_SUCCESS = "HEROS_SUCCESS"
 export const SEARCH_HEROS = "SEARCH_HEROS"
 
-export type HeroType = {
-    information: Hero
-    powerstats: HeroPowerStats[],
-    biography: HeroBiography[],
-    images: HeroImage[]
+export type powerstats = {
+    intelligence: number
+    strength: number
+    speed: number
+    durability: number
+    power: number
+    combat: number
 }
 
-export type Hero = {
+
+
+export type biography = {
+    fullName: string
+}
+
+
+export type images = {
+    md: string
+}
+
+
+export type HeroType = {
     id: number
     name: string
-}
-
-export type HeroPowerStats = {
-    powerstats: {
-        intelligence: number
-        strength: number
-        speed: number
-        durability: number
-        power: number
-        combat: number
-    }
-}
-
-export type HeroBiography = {
-    biography: {
-        fullName: string
-    }
-}
-
-export type HeroImage = {
-    images: {
-        md: string
-    }
+    powerstats: powerstats
+    biography: biography
+    images: images
 }
 
 export interface LoadingHeros {
@@ -46,7 +40,7 @@ export interface HerosFail {
 }
 export interface HerosSuccess {
     type: typeof HEROS_SUCCESS,
-    payload: HeroType
+    payload: Array<HeroType>
 }
 export interface SearchHeros {
     type: typeof SEARCH_HEROS,

@@ -3,7 +3,7 @@ import { HeroDispatchTypes, HEROS_SUCCESS, LOADING_HEROS, HEROS_FAIL, HeroType }
 
 interface defaultStateI {
     loading: boolean,
-    heros?: HeroType
+    heros?: HeroType[]
 }
 
 const defaultState: defaultStateI = {
