@@ -1,4 +1,46 @@
+@import url('../../styles/variables.css');
+
 .container {
-    outline: 1px solid black;
-    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+    background: rgba(54, 44, 106, 0.65);
+    backdrop-filter: blur(27px);
+    border-radius: 16px;
+    max-width: 286px;
+    max-height: 174px;
+}
+
+.heart {
+    width: 48px;
+    height: 48px;
+    top: 112px;
+    left: 80px;
+    position: absolute;
+    left: 28.07%;
+    right: 55.09%;
+    top: 64.37%;
+    bottom: 8.05%;
+    background: #6a4dbc;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+
+}
+.imgC {
+    width: 105px;
+    height: 140px;
+    left: 16px;
+    top: 16px;
+    border-radius: 12px;
+}
+
+
+.content{
+    width: 100%;
 }
