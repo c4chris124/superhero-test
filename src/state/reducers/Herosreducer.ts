@@ -9,10 +9,6 @@ interface defaultStateI {
 const defaultState: defaultStateI = {
     loading: false
 }
-type Action = {
-    type: string,
-    payload?: number
-}
 
 const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchTypes): defaultStateI => {
     switch (action.type) {
