@@ -1,6 +1,7 @@
 export const LOADING_HEROS ="LOADING_HEROS"
 export const HEROS_FAIL = "HEROS_FAIL"
 export const HEROS_SUCCESS = "HEROS_SUCCESS"
+export const SEARCH_HEROS = "SEARCH_HEROS"
 
 export type HeroType = {
     information: Hero
@@ -45,6 +46,10 @@ export interface HerosFail {
 }
 export interface HerosSuccess {
     type: typeof HEROS_SUCCESS,
+    payload: HeroType
+}
+export interface SearchHeros {
+    type: typeof SEARCH_HEROS,
     payload: HeroType
 }
 
