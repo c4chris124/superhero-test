@@ -15,9 +15,11 @@
     "@types/redux-thunk": "^2.1.0",
     "axios": "^0.26.0",
     "react": "^17.0.2",
+    "react-content-loader": "^6.1.0",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
     "react-scripts": "5.0.0",
+    "react-window": "^1.8.6",
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-window": "^1.8.5"
   }
 }
