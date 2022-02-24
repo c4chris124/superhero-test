@@ -36,7 +36,9 @@ const SuperHeros = () => {
 
 
     const Cell = ({ columnIndex, rowIndex, style }: CellProps) => {
-        const { id, images, name, biography, powerstats } = herostate && herostate[rowIndex] || {}
+        const itemss = herostate && herostate[[columnIndex][rowIndex]]
+        // const { id, images, name, biography, powerstats } = herostate && herostate[columnIndex] || {}
+        const { id, images, name, biography, powerstats } = itemss || {}
         const stats = powerstats && powerstats ? [rowIndex] : Number
         const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
         const num = parseFloat(strength)
@@ -97,7 +99,7 @@ const SuperHeros = () => {
                     columnCount={4}
                     columnWidth={350}
                     height={800}
-                    rowCount={len || 100}
+                    rowCount={len || 10}
                     rowHeight={220}
                     width={1400}
                 >
