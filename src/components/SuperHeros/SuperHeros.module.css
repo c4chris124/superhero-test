@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item_container{
+    outline: 2px  solid red;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    grid-gap: .5rem;
+    width: 100%;
+}
+
+.title_container{
+    margin-left: 10px;
+}
+
+.search_container{
+    margin-right: 10px;
+}

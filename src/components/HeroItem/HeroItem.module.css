@@ -1,0 +1,85 @@
+@import url('../../styles/variables.css');
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 16px;
+    max-width: 286px;
+    max-height: 174px;
+    background: rgba(54, 44, 106, 0.65);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover
+    linear-gradient(rgb(219, 166, 166), rgb(0, 0, 172))
+}
+
+
+.container:hover,
+.container:focus,
+.container:active{
+    outline: 2px solid  #7255A7;
+}
+
+.heart {
+    width: 48px;
+    height: 48px;
+    top: 112px;
+    left: 80px;
+    position: absolute;
+    left: 28.07%;
+    right: 55.09%;
+    top: 64.37%;
+    bottom: 8.05%;
+    background: #6a4dbc;
+    border-radius: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+
+}
+.imgC {
+    width: 105px;
+    height: 140px;
+    left: 16px;
+    top: 16px;
+    border-radius: 12px;
+}
+
+
+.content{
+    position: static;
+    width: 132px;
+    left: calc(50% - 132px/2);
+    top: 0%;
+    bottom: 68.13%;
+}
+
+.content h4 {
+    font-size: 20px;
+    line-height: 143%;
+}
+
+.content_realName{
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.49)
+}
+
+.content_str{
+    font-size: 20px;
+}
+
+.content_score{
+    font-size: 18px;
+    font-weight:400;
+    color: rgba(255, 255, 255, 0.49)
+}
