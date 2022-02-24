@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { FixedSizeGrid as Grid } from "react-window";
 import { getHeros } from "../../state/actions/actionCreators";
@@ -6,14 +6,25 @@ import { HeroType } from "../../state/actions/actionTypes";
 import { RootStore } from '../../state/store/store';
 import HeroItem from "../HeroItem/HeroItem";
 import LoaderCards from "../LoaderCards/LoaderCards";
+import LoaderTitle from "../LoaderTitles/LoaderTitle";
 import SearchBar from "../SearchBar/SearchBar";
 import st from './SuperHeros.module.css'
-import useLocalStorage from "../../hooks/useLocalStorage";
 import AutoSizer from 'react-virtualized-auto-sizer'
+
+const getLocalItems = () => {
+    let items = localStorage.getItem('items')
+    if (items) {
+        return JSON.parse(items)
+    } else {
+        return []
+    }
+}
 
 const SuperHeros = () => {
     const herostate = useSelector((state: RootStore) => state.heros.heros)
     const loading = useSelector((state: RootStore) => state.heros.loading)
+    const [items, setItems] = useState<Array<number | undefined>>(getLocalItems())
+    const len:number|undefined = herostate?.length
 
     type CellProps = {
         columnIndex: number
@@ -21,32 +32,65 @@ const SuperHeros = () => {
         style: any
     }
 
+
+
     const Cell = ({ columnIndex, rowIndex, style }: CellProps) => {
         const { id, images, name, biography, powerstats } = herostate && herostate[rowIndex] || {}
-        const stats = powerstats && powerstats?[rowIndex]: Number
-        const strength = Math.floor(Object.values(stats).reduce((a, b) => a + b, 0) /  Object.values(stats).length * .10)
+        const stats = powerstats && powerstats ? [rowIndex] : Number
+        const strength = Math.floor(Object.values(stats).reduce((a, b) => a + b, 0) / Object.values(stats).length * .10)
+
+        const addItem = () => {
+            setItems([...items, id])
+        }
+
         return (
             <div style={style}>
-                <HeroItem id={id} image={images?.md} key={id} name={name} realName={biography?.fullName} strength={ strength } />
+                {
+                    loading
+                        ?
+                        <LoaderCards />
+                        :
+                        <a href="#top" style={{ textDecoration: 'none', color: 'inherit' }} onClick={addItem}>
+                            <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={strength} />
+                        </a>
+                }
             </div>
         )
     }
 
+    useEffect(() => {
+        localStorage.setItem('items', JSON.stringify(items))
+    }, [items])
+    
     return (
         <div className={st.container}>
             <div className={st.header}>
-                <div className={st.title_container}>
-                    <h1>All Superheros</h1>
-                </div>
+                {
+                    loading
+                        ?
+                        <div className="">
+                            <LoaderTitle />
+                        </div>
+                        :
+                        <div className={st.title_container}>
+                            <h1>All Superheros</h1>
+                        </div>
+                }
                 <div className={st.search_container}>
-                    <SearchBar />
+                    {
+                        loading
+                            ?
+                            <LoaderTitle />
+                            :
+                            <SearchBar />
+                    }
                 </div>
             </div>
             <Grid
                 columnCount={4}
                 columnWidth={350}
                 height={800}
-                rowCount={100}
+                rowCount={len || 100}
                 rowHeight={220}
                 width={1400}
             >

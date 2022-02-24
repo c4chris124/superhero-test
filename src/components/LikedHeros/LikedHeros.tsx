@@ -4,7 +4,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import smallHeart from '../../assets/small-heart/small-heart.svg'
 import st from './LikedHeros.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 const LikedHeros = () => {
   const [expanded, setExpanded] = useState<string | false>(false);
 
