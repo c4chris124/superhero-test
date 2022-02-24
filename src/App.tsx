@@ -17,8 +17,12 @@ function App() {
   return (
     <div className="App">
       <NavBar/>
+      <div style={{width: '70%'}}>
       <LikedHeros/>
+      </div>
+      <div>
       <SuperHeros/>
+      </div>
     </div>
   );
 }
