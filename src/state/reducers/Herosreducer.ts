@@ -28,7 +28,7 @@ const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchT
                 copyHeros: action.payload
             }
         case SEARCH_HEROS:
-            let filteredHero = action.payload === "Cancel" ? state.heros : state.copyHeros?.filter((e) => action.payload == e.name || action.payload == e.biography.fullName)        
+            let filteredHero = state.copyHeros?.filter((e) => action.payload == e.name || action.payload == e.biography.fullName)        
             return{
                 ...state,
                 loading: false,
