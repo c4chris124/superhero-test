@@ -5,14 +5,23 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import smallHeart from '../../assets/small-heart/small-heart.svg'
 import st from './LikedHeros.module.css'
 import { useState, useEffect } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootStore } from '../../state/store/store';
+import { getLikedHeros } from '../../state/actions/actionCreators';
 const LikedHeros = () => {
+  const dispatch = useDispatch()
   const [expanded, setExpanded] = useState<string | false>(false);
-
+  const likedItemsId = useSelector((state: RootStore) => state.likedHeros.likedHeros)
+  
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
+
+
+  useEffect(() => {
+      // dispatch(getLikedHeros(likedItemsId))
+  }, [])
 
   return (
     <div>

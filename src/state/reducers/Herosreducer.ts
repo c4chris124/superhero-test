@@ -1,9 +1,9 @@
-import { HeroDispatchTypes, HEROS_SUCCESS, LOADING_HEROS, HEROS_FAIL, HeroType } from "../actions/actionTypes";
+import { HeroDispatchTypes, HEROS_SUCCESS, LOADING_HEROS, HEROS_FAIL, HeroType, GET_LIKED_HEROS, ADD_LIKED_HERO } from "../actions/actionTypes";
 
 
 interface defaultStateI {
     loading: boolean,
-    heros?: HeroType[]
+    heros?: HeroType[],
 }
 
 const defaultState: defaultStateI = {
@@ -14,7 +14,7 @@ const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchT
     switch (action.type) {
         case HEROS_FAIL:
             return {
-                loading: false
+                loading: true
             }
         case LOADING_HEROS:
             return {

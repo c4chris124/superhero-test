@@ -2,6 +2,8 @@ export const LOADING_HEROS = "LOADING_HEROS"
 export const HEROS_FAIL = "HEROS_FAIL"
 export const HEROS_SUCCESS = "HEROS_SUCCESS"
 export const SEARCH_HEROS = "SEARCH_HEROS"
+export const GET_LIKED_HEROS = "GET_LIKED_HEROS"
+export const ADD_LIKED_HERO = "ADD_LIKED_HERO"
 
 export type powerstats = {
     intelligence: number
@@ -32,6 +34,7 @@ export type HeroType = {
     images: images
 }
 
+
 export interface LoadingHeros {
     type: typeof LOADING_HEROS
 }
@@ -47,4 +50,16 @@ export interface SearchHeros {
     payload: HeroType
 }
 
-export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess
+export interface AddLikedHeros {
+    type: typeof ADD_LIKED_HERO,
+    payload: number[]
+}
+
+export interface LikedHeros {
+    type: typeof GET_LIKED_HEROS,
+    payload: Array<HeroType>
+}
+
+export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess 
+
+export type LikedHeroDispatchTypes = AddLikedHeros | LikedHeros

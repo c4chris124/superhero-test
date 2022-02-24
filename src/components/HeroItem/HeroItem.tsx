@@ -2,8 +2,8 @@ import st from './HeroItem.module.css'
 import Mheart from '../../assets/medium-heart/medium-heart.svg'
 import fist from '../../assets/fist/fist.svg'
 import { powerstats } from '../../state/actions/actionTypes'
-type HeroProps =
- {
+
+type HeroProps = {
   id: number | undefined
   image: string | undefined
   name: string | undefined
@@ -13,11 +13,7 @@ type HeroProps =
 
 const HeroItem = (props: HeroProps) => {
   const {id, image, name, realName, strength} = props
-
-  const handleClickSaveLocalStorage = () => {
-    console.log(id);
-    
-  }
+  
   return (
     <div className={st.container}>
       <div>
