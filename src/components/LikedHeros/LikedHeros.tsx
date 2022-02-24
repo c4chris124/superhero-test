@@ -12,7 +12,7 @@ const LikedHeros = () => {
   const dispatch = useDispatch()
   const [expanded, setExpanded] = useState<string | false>(false);
   const likedItemsId = useSelector((state: RootStore) => state.likedHeros.likedHeros)
-  
+
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
@@ -20,25 +20,29 @@ const LikedHeros = () => {
 
 
   useEffect(() => {
-      // dispatch(getLikedHeros(likedItemsId))
+    // dispatch(getLikedHeros(likedItemsId))
   }, [])
 
   return (
     <div>
       <Accordion
-          expanded={expanded === 'panel1'} 
-          onChange={handleChange('panel1')}
+        expanded={expanded === 'panel1'}
+        onChange={handleChange('panel1')}
         sx={{
           background: expanded ? '#11072F' : '#2A1B57',
           color: 'white',
           outline: `2px solid  #7255A7`,
-          borderRadius: '16px',
-          width: '100%'
+          width: '100%',
         }}
       >
         <AccordionSummary
-
-          expandIcon={<ExpandMoreIcon sx={{ color: 'white', fontSize: '30px' }} />}>
+          expandIcon={<ExpandMoreIcon
+            sx={{ color: 'white', fontSize: '30px'}}
+          />}
+          sx={{
+            height: '80px'
+          }}
+        >
           <div className={st.header_container}>
             <span className={st.heart_container}>
               <img src={smallHeart} alt="" />
