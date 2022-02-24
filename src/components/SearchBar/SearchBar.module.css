@@ -2,6 +2,18 @@
     width: 400px;
 }
 
+.search_icon{
+    padding: 8px;
+}
+
+.search_button{
+    border: 0;
+    background: transparent;
+    /* margin-top: 5px; */
+    cursor: pointer;
+    padding: 0;
+}
+
 .search_input_container {
     display: flex;
     flex-direction: row;
@@ -19,9 +31,4 @@
     border:none;
     outline: none;
     background-color: rgba(240, 248, 255, 0);
-}
-
-.search_icon {
-    position: inherit;
-    margin: 5px;
 }

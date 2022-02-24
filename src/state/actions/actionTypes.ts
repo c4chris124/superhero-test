@@ -47,7 +47,7 @@ export interface HerosSuccess {
 }
 export interface SearchHeros {
     type: typeof SEARCH_HEROS,
-    payload: HeroType
+    payload: string
 }
 
 export interface AddLikedHeros {
@@ -60,6 +60,6 @@ export interface LikedHeros {
     payload: Array<HeroType>
 }
 
-export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess 
+export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess | SearchHeros
 
 export type LikedHeroDispatchTypes = AddLikedHeros | LikedHeros

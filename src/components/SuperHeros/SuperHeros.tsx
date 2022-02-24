@@ -25,7 +25,7 @@ const SuperHeros = () => {
     const loading = useSelector((state: RootStore) => state.heros.loading)
     const [heros, setHeros] = useState<HeroType>()
     const [items, setItems] = useState<Array<number | undefined>>(getLocalItems())
-    const len:number|undefined = herostate?.length
+    const len: number | undefined = herostate?.length
 
     type CellProps = {
         columnIndex: number
@@ -40,7 +40,7 @@ const SuperHeros = () => {
         const stats = powerstats && powerstats ? [rowIndex] : Number
         const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
         const num = parseFloat(strength)
-        
+
         const addItem = () => {
             setItems([...items, id])
         }
@@ -66,7 +66,7 @@ const SuperHeros = () => {
         dispatch(addLikedHeros(getLocalItems()))
         localStorage.setItem('items', JSON.stringify(items))
     }, [items])
-    
+
     return (
         <div className={st.container}>
             <div className={st.header}>
@@ -91,16 +91,22 @@ const SuperHeros = () => {
                     }
                 </div>
             </div>
-            <Grid
-                columnCount={4}
-                columnWidth={350}
-                height={800}
-                rowCount={len || 100}
-                rowHeight={220}
-                width={1400}
-            >
-                {Cell}
-            </Grid>
+            {len
+                ?
+                <Grid
+                    columnCount={4}
+                    columnWidth={350}
+                    height={800}
+                    rowCount={len || 100}
+                    rowHeight={220}
+                    width={1400}
+                >
+                    {Cell}
+                </Grid>
+                :
+                <h4>Couldn't Get any Hero</h4>
+        }
+
         </div>
     )
 }
