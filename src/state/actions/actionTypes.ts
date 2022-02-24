@@ -27,7 +27,7 @@ export type images = {
 export type HeroType = {
     id: number
     name: string
-    powerstats: powerstats
+    powerstats: powerstats[]
     biography: biography
     images: images
 }
