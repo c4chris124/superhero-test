@@ -8,26 +8,12 @@ import HeroItem from "../HeroItem/HeroItem";
 import LoaderCards from "../LoaderCards/LoaderCards";
 import SearchBar from "../SearchBar/SearchBar";
 import st from './SuperHeros.module.css'
-
-
-
+import useLocalStorage from "../../hooks/useLocalStorage";
+import AutoSizer from 'react-virtualized-auto-sizer'
 
 const SuperHeros = () => {
-
     const herostate = useSelector((state: RootStore) => state.heros.heros)
     const loading = useSelector((state: RootStore) => state.heros.loading)
-
-    const Cells = useCallback((i, style) => {
-
-        const { id, images, name, biography } = herostate && herostate[i] || {}
-
-        // post.Reviews.map(item => item.rating).reduce((a, b) => a + b, 0) / post.Reviews.length
-        return (
-            <div style={style}>
-                <HeroItem image={images?.md} key={id} name={name} realName={biography?.fullName} strength={1} />
-            </div>
-        )
-    }, [])
 
     type CellProps = {
         columnIndex: number
@@ -35,39 +21,37 @@ const SuperHeros = () => {
         style: any
     }
 
-    const Cell = ({ columnIndex, rowIndex, style }:CellProps) => {
-        const { id, images, name, biography } = herostate && herostate[rowIndex] || {}
+    const Cell = ({ columnIndex, rowIndex, style }: CellProps) => {
+        const { id, images, name, biography, powerstats } = herostate && herostate[rowIndex] || {}
+        const stats = powerstats && powerstats?[rowIndex]: Number
+        const strength = Math.floor(Object.values(stats).reduce((a, b) => a + b, 0) /  Object.values(stats).length * .10)
         return (
             <div style={style}>
-                <HeroItem image={images?.md} key={id} name={name} realName={biography?.fullName} strength={1} />
+                <HeroItem id={id} image={images?.md} key={id} name={name} realName={biography?.fullName} strength={ strength } />
             </div>
         )
     }
-
-    console.log(herostate);
 
     return (
         <div className={st.container}>
             <div className={st.header}>
                 <div className={st.title_container}>
-                <h1>All Superheros</h1>
+                    <h1>All Superheros</h1>
                 </div>
                 <div className={st.search_container}>
-                <SearchBar />
+                    <SearchBar />
                 </div>
             </div>
-            {/* <div className={st.item_container}> */}
             <Grid
-            columnCount={4}
-            columnWidth={350}
-            height={800}
-            rowCount={100}
-            rowHeight={220}
-            width={1500}
+                columnCount={4}
+                columnWidth={350}
+                height={800}
+                rowCount={100}
+                rowHeight={220}
+                width={1400}
             >
                 {Cell}
             </Grid>
-            {/* </div> */}
         </div>
     )
 }
