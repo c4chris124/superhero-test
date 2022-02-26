@@ -17,13 +17,11 @@ function App() {
 
   return (
     <div className="App">
+      <div className="container">
       <NavBar/>
-      {/* <div style={{width: '100%', height: '100%'}}> */}
       <LikedHeros/>
-      {/* </div> */}
-      {/* <div style={{width: '100%', height: '100%'}}> */}
+      </div>
       <SuperHeros/>
-      {/* </div> */}
     </div>
   );
 }

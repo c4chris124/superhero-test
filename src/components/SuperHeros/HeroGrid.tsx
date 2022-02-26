@@ -23,9 +23,10 @@ type ItemCardGridProps = {
     items?: any[]
 };
 
-const gridPosition = (col: number, row: number) => row * 4 + col;
+const gridPosition = (col: number, row: number) => row * 6 + col;
 
 const HeroGrid = ({ items }: ItemCardGridProps) => {
+    const len = items ? items?.length : 0
 
     const dispatch = useDispatch()
     const loading = useSelector((state: RootStore) => state.heros.loading)
@@ -64,15 +65,9 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
 
         return (
             <div style={style}>
-                {
-                    loading
-                        ?
-                        <LoaderCards />
-                        :
-                        <a href="#top" style={{ textDecoration: 'none', color: 'inherit' }} onClick={addItem}>
-                            <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={1} />
-                        </a>
-                }
+                <a href="#top" style={{ textDecoration: 'none', color: 'inherit' }} onClick={addItem}>
+                    <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={1} />
+                </a>
             </div>
         )
     }
@@ -81,7 +76,7 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
 
     const S = useMediaQuery("(min-width:360px)");
     const M = useMediaQuery("(min-width:600px)");
-    const L = useMediaQuery("(min-width:1280px)");
+    const L = useMediaQuery("(min-width:1024px)");
     const XL = useMediaQuery("(min-width:1600px)");
 
     const grid = {
@@ -89,16 +84,17 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
     }
 
     if (XL) {
-        grid.columns = 8;
+        grid.columns = 6;
     } else if (L) {
-        grid.columns = 5;
-    } else if (M) {
         grid.columns = 4;
-    } else if (S) {
+    } else if (M) {
         grid.columns = 3;
+    } else if (S) {
+        grid.columns = 2;
     } else {
         grid.columns = 2;
     }
+
 
     return (
         <AutoSizer>
@@ -106,16 +102,16 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
                 <Grid
                     columnCount={grid.columns}
                     columnWidth={width / grid.columns}
-                    height={height}
-                    rowCount={400}
-                    overscanRowCount={10}
-                    rowHeight={116}
+                    height={610}
+                    rowCount={Math.ceil(len / grid.columns)}
+                    overscanRowCount={20}
+                    rowHeight={205}
                     width={width}
-                    style={{ margin: '4px' }}
+                    style={{ margin: '10px' }}
                 >
                     {({ columnIndex, rowIndex, style }) => {
                         const i = gridPosition(columnIndex, rowIndex);
-                        if (!items || items.length === 0) return null;
+                        if (!items || items.length === 0 || i >= items.length) return null;
                         return (
                             <Cell
                                 {...items[i]}

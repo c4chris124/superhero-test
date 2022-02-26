@@ -24,37 +24,35 @@ const LikedHeros = () => {
   }, [])
 
   return (
-    <div>
-      <Accordion
-        expanded={expanded === 'panel1'}
-        onChange={handleChange('panel1')}
+    <Accordion
+      expanded={expanded === 'panel1'}
+      onChange={handleChange('panel1')}
+      sx={{
+        background: expanded ? '#11072F' : '#2A1B57',
+        color: 'white',
+        outline: `2px solid  #7255A7`,
+        width: '100%',
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon
+          sx={{ color: 'white', fontSize: '30px' }}
+        />}
         sx={{
-          background: expanded ? '#11072F' : '#2A1B57',
-          color: 'white',
-          outline: `2px solid  #7255A7`,
-          width: '100%',
+          height: '80px'
         }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon
-            sx={{ color: 'white', fontSize: '30px'}}
-          />}
-          sx={{
-            height: '80px'
-          }}
-        >
-          <div className={st.header_container}>
-            <span className={st.heart_container}>
-              <img src={smallHeart} alt="" />
-            </span>
-            <h2>Liked</h2>
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          Hola
-        </AccordionDetails>
-      </Accordion>
-    </div>
+        <div className={st.header_container}>
+          <span className={st.heart_container}>
+            <img src={smallHeart} alt="" />
+          </span>
+          <h2>Liked</h2>
+        </div>
+      </AccordionSummary>
+      <AccordionDetails>
+        Hola
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

@@ -12,21 +12,27 @@ type HeroProps = {
 }
 
 const HeroItem = (props: HeroProps) => {
-  const {id, image, name, realName, strength} = props
-  
+  const { id, image, name, realName, strength } = props
+
   return (
     <div className={st.container}>
       <div>
         <img className={st.imgC} src={image} alt="" />
         <span className={st.heart}>
-        <img className={st.icon} src={Mheart} alt="" />
+          <img className={st.icon} src={Mheart} alt="" />
         </span>
       </div>
 
       <div className={st.content}>
-        <h4>{name}</h4>
-        <p className={st.content_realName}>Real Name: {realName}</p>
-        <p className={st.content_str}> <span><img src={fist} alt="" /></span> {strength} <span className={st.content_score}>/10</span> </p>
+        <div>
+          <h4>{name}</h4>
+        </div>
+        <div>
+          <p className={st.content_realName}>Real Name: {realName}</p>
+        </div>
+        <div className={st.container_str} >
+          <p> <span><img src={fist} alt="" /></span> {strength} <span className={st.content_score}>/10</span> </p>
+        </div>
       </div>
 
     </div>

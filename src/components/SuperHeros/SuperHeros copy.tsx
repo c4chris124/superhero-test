@@ -6,34 +6,16 @@ import { addLikedHeros, getHeros } from "../../state/actions/actionCreators";
 import { HeroType } from "../../state/actions/actionTypes";
 import { RootStore } from '../../state/store/store';
 import HeroItem from "../HeroItem/HeroItem";
-import LoaderCards from "../LoaderCards/LoaderCards";
+import LoaderCardsContainer from "../LoaderCards/LoaderCardsContainer";
 import LoaderTitle from "../LoaderTitles/LoaderTitle";
 import SearchBar from "../SearchBar/SearchBar";
 import st from './SuperHeros.module.css'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import HeroGrid from "./HeroGrid";
 
-// const getLocalItems = () => {
-//     let items = localStorage.getItem('items')
-//     if (items) {
-//         return JSON.parse(items)
-//     } else {
-//         return []
-//     }
-// }
-
 const SuperHeros = () => {
-
-    const dispatch = useDispatch()
     const herostate = useSelector((state: RootStore) => state.heros.heros)
     const loading = useSelector((state: RootStore) => state.heros.loading)
-    const [heros, setHeros] = useState<HeroType>()
-    // const [items, setItems] = useState<Array<number | undefined>>(getLocalItems())
-    const len: number | undefined = herostate?.length
-
-
-
-
 
     return (
         <div className={st.container}>
@@ -41,7 +23,7 @@ const SuperHeros = () => {
                 {
                     loading
                         ?
-                        <div className="">
+                        <div>
                             <LoaderTitle />
                         </div>
                         :
@@ -59,7 +41,12 @@ const SuperHeros = () => {
                     }
                 </div>
             </div>
-            <HeroGrid items={herostate} />
+            {
+                loading ?
+                    <LoaderCardsContainer/>
+                    :
+                    <HeroGrid items={herostate} />
+            }
         </div>
     )
 }
