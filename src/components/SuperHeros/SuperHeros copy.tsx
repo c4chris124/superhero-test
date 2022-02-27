@@ -1,22 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useMediaQuery } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux"
-import { FixedSizeGrid as Grid } from "react-window";
-import { addLikedHeros, getHeros } from "../../state/actions/actionCreators";
-import { HeroType } from "../../state/actions/actionTypes";
+import { useMemo, useState }  from "react";
+import { useSelector } from "react-redux"
 import { RootStore } from '../../state/store/store';
-import HeroItem from "../HeroItem/HeroItem";
 import LoaderCardsContainer from "../LoaderCards/LoaderCardsContainer";
 import LoaderTitle from "../LoaderTitles/LoaderTitle";
 import SearchBar from "../SearchBar/SearchBar";
 import st from './SuperHeros.module.css'
-import AutoSizer from 'react-virtualized-auto-sizer'
 import HeroGrid from "./HeroGrid";
+import React from "react";
 
 const SuperHeros = () => {
     const herostate = useSelector((state: RootStore) => state.heros.heros)
     const loading = useSelector((state: RootStore) => state.heros.loading)
+    const [searchTerm, setsearchTerm] = useState('')
+    const [searchRedults, setSearchResults] = useState([])
 
+    const searchHandler = (searchTerm:any, items:any) =>{
+        setsearchTerm(searchTerm);
+        if (searchTerm !== "") {            
+            const newItems = items.filter((item:any) => {
+                 return item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.biography.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+            })            
+            setSearchResults(newItems)
+        }
+        else {
+            setSearchResults(items)
+        }
+    }
+    
     return (
         <div className={st.container}>
             <div className={st.header}>
@@ -37,7 +47,7 @@ const SuperHeros = () => {
                             ?
                             <LoaderTitle />
                             :
-                            <SearchBar />
+                            <SearchBar term={searchTerm} searchHandler={searchHandler}/>
                     }
                 </div>
             </div>
@@ -45,7 +55,7 @@ const SuperHeros = () => {
                 loading ?
                     <LoaderCardsContainer/>
                     :
-                    <HeroGrid items={herostate} />
+                    <HeroGrid items={searchTerm.length < 1 ? herostate : searchRedults}/>
             }
         </div>
     )

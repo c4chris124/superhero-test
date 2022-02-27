@@ -1,26 +1,25 @@
 import AutoSizer from 'react-virtualized-auto-sizer'
 import { addLikedHeros } from "../../state/actions/actionCreators";
-import { HeroType } from "../../state/actions/actionTypes";
-import { RootStore } from '../../state/store/store';
 import { useMediaQuery } from "@mui/material";
-import LoaderCards from "../LoaderCards/LoaderCards";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import HeroItem from "../HeroItem/HeroItem";
 import { FixedSizeGrid as Grid } from "react-window";
+import st from './SuperHeros.module.css'
+import React from 'react';
 
 const getLocalItems = () => {
-    let items = localStorage.getItem('items')
-    if (items) {
-        return JSON.parse(items)
+    let likedItems = localStorage.getItem('likedItems')
+    if (likedItems) {
+        return JSON.parse(likedItems)
     } else {
         return []
     }
 }
 
-
 type ItemCardGridProps = {
-    items?: any[]
+    items?: any[],
+    term?: string,
 };
 
 const gridPosition = (col: number, row: number) => row * 6 + col;
@@ -29,7 +28,6 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
     const len = items ? items?.length : 0
 
     const dispatch = useDispatch()
-    const loading = useSelector((state: RootStore) => state.heros.loading)
     const [likedItems, setLikedItems] = useState<Array<number | undefined>>(getLocalItems())
 
     useEffect(() => {
@@ -65,14 +63,12 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
 
         return (
             <div style={style}>
-                <a href="#top" style={{ textDecoration: 'none', color: 'inherit' }} onClick={addItem}>
+                <a href="#top" style={{  all: 'unset', cursor: 'pointer' }} onClick={addItem}>
                     <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={1} />
                 </a>
             </div>
         )
     }
-
-
 
     const S = useMediaQuery("(min-width:360px)");
     const M = useMediaQuery("(min-width:600px)");
@@ -94,7 +90,6 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
     } else {
         grid.columns = 2;
     }
-
 
     return (
         <AutoSizer>

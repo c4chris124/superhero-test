@@ -9,8 +9,8 @@ const LoaderCardsContainer = () => {
     return (
         <div className={st.container}>
             {
-                loaderItems.map(() => (
-                    <LoaderCards/>
+                loaderItems.map((e, i) => (
+                    <LoaderCards key={i}/>
                 ))
             }
         </div>
