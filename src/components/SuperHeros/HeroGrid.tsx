@@ -57,14 +57,18 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
     }
 
     const Cell = ({ id, name, images, biography, powerstats, addItem, style }: CellProps) => {
+
         addItem = () => {
             setLikedItems([...likedItems, id])
         }
+        const stats = powerstats && powerstats
+        const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
+        const num = parseFloat(strength)
 
         return (
             <div style={style}>
                 <a href="#top" style={{  all: 'unset', cursor: 'pointer' }} onClick={addItem}>
-                    <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={1} />
+                    <HeroItem key={id} id={id} image={images?.md} name={name} realName={biography?.fullName} strength={num} />
                 </a>
             </div>
         )
