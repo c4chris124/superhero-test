@@ -3,6 +3,7 @@ export const HEROS_FAIL = "HEROS_FAIL"
 export const HEROS_SUCCESS = "HEROS_SUCCESS"
 export const GET_LIKED_HEROS = "GET_LIKED_HEROS"
 export const ADD_LIKED_HERO = "ADD_LIKED_HERO"
+export const REMOVED_LIKED_HEROS = "REMOVED_LIKED_HEROS"
 
 export type powerstats = {
     intelligence: number
@@ -45,8 +46,13 @@ export interface AddLikedHeros {
     payload: Array<any>
 }
 
+export interface removeLikedHeros {
+    type: typeof REMOVED_LIKED_HEROS,
+    payload: number
+}
+
 export interface LikedHeros {
     type: typeof GET_LIKED_HEROS
 }
 
-export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess | AddLikedHeros | LikedHeros
+export type HeroDispatchTypes = LoadingHeros | HerosFail | HerosSuccess | AddLikedHeros | LikedHeros | removeLikedHeros
