@@ -21,11 +21,20 @@ const HeroItem = (props: HeroProps) => {
   const filled = likedData.includes(id)
 
 
+  const handleOnClick = (el:any) => {
+    for (let i = 0; i < el.length; i++) {
+      if (el[i] === id) {
+        el.splice(i,1)
+      }
+    }
+  }
+
+
   return (
     <div className={st.container}>
       {
         filled ?
-          <button style={{ all: 'unset', cursor: 'pointer' }}>
+          <button style={{ all: 'unset', cursor: 'pointer' }} onClick={handleOnClick}>
             <div>
               <img className={st.imgC} src={image} alt="" />
               <span className={st.heart}>
