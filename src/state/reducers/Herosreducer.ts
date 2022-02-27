@@ -1,17 +1,18 @@
-import { HeroDispatchTypes, HEROS_SUCCESS, LOADING_HEROS, HEROS_FAIL, HeroType, GET_LIKED_HEROS, ADD_LIKED_HERO, SEARCH_HEROS } from "../actions/actionTypes";
+import { HeroDispatchTypes, HEROS_SUCCESS, LOADING_HEROS, HEROS_FAIL, HeroType, GET_LIKED_HEROS, ADD_LIKED_HERO } from "../actions/actionTypes";
 
 
-interface defaultStateI {
+export interface defaultStateI {
     loading: boolean,
-    heros?: HeroType[],
-    copyHeros?: HeroType[]
+    likedHeros?: any
+    heros?: HeroType[]
 }
+
 
 const defaultState: defaultStateI = {
-    loading: false
+    loading: true,
 }
 
-const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchTypes): defaultStateI => {
+const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchTypes) : defaultStateI => {
     switch (action.type) {
         case HEROS_FAIL:
             return {
@@ -21,19 +22,26 @@ const Herosreducer = (state: defaultStateI = defaultState, action: HeroDispatchT
             return {
                 loading: true
             }
+        case ADD_LIKED_HERO:
+            return {
+                ...state,
+                likedHeros: action.payload
+            }
         case HEROS_SUCCESS:
             return {
                 loading: false,
-                heros: action.payload,
-                copyHeros: action.payload
+                heros: action.payload
             }
-        case SEARCH_HEROS:
-            let filteredHero = state.copyHeros?.filter((e) => action.payload == e.name || action.payload == e.biography.fullName)        
-            return{
-                ...state,
+        case GET_LIKED_HEROS:
+            // const filter = state.heros?.filter((e) => {
+
+            //     return state.likedData ? state.likedData.includes(e.id) : null
+            // })
+            
+            return {
                 loading: false,
-                heros: filteredHero
-            }   
+            }
+
         default:
             return state
     }

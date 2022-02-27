@@ -1,7 +1,10 @@
 import st from './HeroItem.module.css'
 import Mheart from '../../assets/medium-heart/medium-heart.svg'
 import fist from '../../assets/fist/fist.svg'
-import { powerstats } from '../../state/actions/actionTypes'
+import filledHeart from '../../assets/medium-filled-heart/medium-filled-heart.svg'
+import { useSelector } from 'react-redux'
+import { RootStore } from '../../state/store/store'
+
 
 type HeroProps = {
   id: number | undefined
@@ -12,24 +15,55 @@ type HeroProps = {
 }
 
 const HeroItem = (props: HeroProps) => {
-  const {id, image, name, realName, strength} = props
-  
+  const { id, image, name, realName, strength } = props
+
+  const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
+  const filled = likedData.includes(id)
+
+
+  const handleOnClick = (el:any) => {
+    for (let i = 0; i < el.length; i++) {
+      if (el[i] === id) {
+        el.splice(i,1)
+      }
+    }
+  }
+
+
   return (
     <div className={st.container}>
-      <div>
-        <img className={st.imgC} src={image} alt="" />
-        <span className={st.heart}>
-        <img className={st.icon} src={Mheart} alt="" />
-        </span>
-      </div>
+      {
+        filled ?
+          <button style={{ all: 'unset', cursor: 'pointer' }} onClick={handleOnClick}>
+            <div>
+              <img className={st.imgC} src={image} alt="" />
+              <span className={st.heart}>
+                <img className={st.icon} src={filledHeart} alt="" />
+              </span>
+            </div>
+          </button>
+          :
+          <div>
+            <img className={st.imgC} src={image} alt="" />
+            <span className={st.heart}>
+              <img className={st.icon} src={Mheart} alt="" />
+            </span>
+          </div>
+      }
 
       <div className={st.content}>
-        <h4>{name}</h4>
-        <p className={st.content_realName}>Real Name: {realName}</p>
-        <p className={st.content_str}> <span><img src={fist} alt="" /></span> {strength} <span className={st.content_score}>/10</span> </p>
+        <div>
+          <h4>{name}</h4>
+        </div>
+        <div>
+          <p className={st.content_realName}>Real Name: {realName}</p>
+        </div>
+        <div className={st.container_str} >
+          <p> <span><img src={fist} alt="" /></span> {strength} <span className={st.content_score}>/10</span> </p>
+        </div>
       </div>
 
-    </div>
+    </div >
   )
 }
 

@@ -1,8 +1,8 @@
 .container{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;   
+    width: auto;
+    height: auto;
 }
 
 .header{
@@ -27,3 +27,11 @@
 .search_container{
     margin-right: 10px;
 }
+
+
+@media only screen and (max-width:460px) {
+    .title_container h1 {
+        font-size: 17px;
+    }
+}
+
