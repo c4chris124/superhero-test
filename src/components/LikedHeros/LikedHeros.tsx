@@ -6,14 +6,16 @@ import smallHeart from '../../assets/small-heart/small-heart.svg'
 import st from './LikedHeros.module.css'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLikedHeros } from '../../state/actions/actionCreators';
 import { RootStore } from '../../state/store/store';
 import HeroItem from '../HeroItem/HeroItem';
+import bigHeart from '../../assets/big-heart/big-heart.svg'
+import { HeroType } from '../../state/actions/actionTypes';
 
 
 const LikedHeros = () => {
   const dispatch = useDispatch()
   const [expanded, setExpanded] = useState<string | false>(false)
+  const [likedHeros, setLikedHeros] = useState <Array<HeroType | undefined>>()
   const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
   const heros = useSelector((state: RootStore) => state.heros.heros)
 
@@ -22,15 +24,14 @@ const LikedHeros = () => {
       setExpanded(isExpanded ? panel : false);
     };
 
-  const filter = heros?.filter((e) => {
-    return likedData ? likedData.includes(e.id) : null
-  })
+    const filter = heros?.filter((e) => {
+      return likedData ? likedData.includes(e.id) : null
+    })
+    
+  //   useEffect(() => {
 
-  console.log(filter);
-  
+  //   setLikedHeros(filter)
 
-  // useEffect(() => {
-  //   dispatch(getLikedHeros())
   // }, [])
 
   return (
@@ -60,28 +61,27 @@ const LikedHeros = () => {
         </div>
       </AccordionSummary>
       <AccordionDetails>
-        <div className={st.cards_container}>
-          {
-            filter?.map((e: any) => {
-              const stats: object = e.powerstats
-              const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
-              const num = parseFloat(strength)
-              return < HeroItem key={e.id} id={e.id} image={e.images?.md} name={e.name} realName={e.biography?.fullName} strength={num} />
-            })}
-
-        </div>
+        {
+          likedData ?
+            <div className={st.cards_container}>
+              {
+                filter?.map((e: any) => {
+                  const stats: object = e.powerstats
+                  const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
+                  const num = parseFloat(strength)
+                  return < HeroItem key={e.id} id={e.id} image={e.images?.md} name={e.name} realName={e.biography?.fullName} strength={num} />
+                })
+              }
+            </div>
+            :
+            <div >
+              <img src={bigHeart} alt="" />
+              <h3>You haven't liked any superhero yet</h3>
+            </div>
+        }
       </AccordionDetails>
     </Accordion>
   )
 }
 
 export default LikedHeros
-
-// {
-//   likedItems(likedItemsId).map((e: any) => {
-//     const stats: object = e.powerstats
-//     const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
-//     const num = parseFloat(strength)
-//     return <HeroItem key={e.id} id={e.id} image={e.images?.md} name={e.name} realName={e.biography?.fullName} strength={num} />
-//   })
-// }

@@ -1,4 +1,4 @@
-import { useMemo, useState }  from "react";
+import { useEffect, useMemo, useState }  from "react";
 import { useSelector } from "react-redux"
 import { RootStore } from '../../state/store/store';
 import LoaderCardsContainer from "../LoaderCards/LoaderCardsContainer";
@@ -13,6 +13,17 @@ const SuperHeros = () => {
     const loading = useSelector((state: RootStore) => state.heros.loading)   
     const [searchTerm, setsearchTerm] = useState('')
     const [searchRedults, setSearchResults] = useState([])
+    const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
+
+    const filter = herostate?.filter((e) => {
+        return likedData ? !likedData.includes(e.id) : null
+      })
+
+      console.log(filter);
+      
+      useEffect(() => {
+          
+      }, [likedData])
 
     const searchHandler = (searchTerm:any, items:any) =>{
         setsearchTerm(searchTerm);
@@ -55,7 +66,7 @@ const SuperHeros = () => {
                 loading ?
                     <LoaderCardsContainer/>
                     :
-                    <HeroGrid items={searchTerm.length < 1 ? herostate : searchRedults}/>
+                    <HeroGrid items={searchTerm.length < 1 ? filter : searchRedults}/>
             }
         </div>
     )

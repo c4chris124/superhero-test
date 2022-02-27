@@ -1,7 +1,10 @@
 import st from './HeroItem.module.css'
 import Mheart from '../../assets/medium-heart/medium-heart.svg'
 import fist from '../../assets/fist/fist.svg'
-import { powerstats } from '../../state/actions/actionTypes'
+import filledHeart from '../../assets/medium-filled-heart/medium-filled-heart.svg'
+import { useSelector } from 'react-redux'
+import { RootStore } from '../../state/store/store'
+
 
 type HeroProps = {
   id: number | undefined
@@ -14,14 +17,30 @@ type HeroProps = {
 const HeroItem = (props: HeroProps) => {
   const { id, image, name, realName, strength } = props
 
+  const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
+  const filled = likedData.includes(id)
+
+
   return (
     <div className={st.container}>
-      <div>
-        <img className={st.imgC} src={image} alt="" />
-        <span className={st.heart}>
-          <img className={st.icon} src={Mheart} alt="" />
-        </span>
-      </div>
+      {
+        filled ?
+          <button style={{ all: 'unset', cursor: 'pointer' }}>
+            <div>
+              <img className={st.imgC} src={image} alt="" />
+              <span className={st.heart}>
+                <img className={st.icon} src={filledHeart} alt="" />
+              </span>
+            </div>
+          </button>
+          :
+          <div>
+            <img className={st.imgC} src={image} alt="" />
+            <span className={st.heart}>
+              <img className={st.icon} src={Mheart} alt="" />
+            </span>
+          </div>
+      }
 
       <div className={st.content}>
         <div>
@@ -35,7 +54,7 @@ const HeroItem = (props: HeroProps) => {
         </div>
       </div>
 
-    </div>
+    </div >
   )
 }
 
