@@ -14,3 +14,31 @@
     align-items: center;
     margin-right: 10px;
 }
+
+.cards_container{
+    display: grid;
+    grid-template-columns: repeat(6, .5fr);
+    grid-auto-rows: auto;
+    grid-gap: .5rem;
+}
+
+@media screen(min-width:360px) {
+    .cards_container{
+        grid-template-columns: repeat(2, .5fr);
+    }
+}
+@media screen(min-width:600px) {
+    .cards_container{
+        grid-template-columns: repeat(3, .5fr);
+    }
+}
+@media screen(min-width:1024px) {
+    .cards_container{
+        grid-template-columns: repeat(4, .5fr);
+    }
+}
+@media screen(min-width:1600px) {
+    .cards_container{
+        grid-template-columns: repeat(6, .5fr);
+    }
+}

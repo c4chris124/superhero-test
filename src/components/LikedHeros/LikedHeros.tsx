@@ -6,22 +6,32 @@ import smallHeart from '../../assets/small-heart/small-heart.svg'
 import st from './LikedHeros.module.css'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStore } from '../../state/store/store';
 import { getLikedHeros } from '../../state/actions/actionCreators';
+import { RootStore } from '../../state/store/store';
+import HeroItem from '../HeroItem/HeroItem';
+
+
 const LikedHeros = () => {
   const dispatch = useDispatch()
-  const [expanded, setExpanded] = useState<string | false>(false);
-  const likedItemsId = useSelector((state: RootStore) => state.likedHeros.likedHeros)
+  const [expanded, setExpanded] = useState<string | false>(false)
+  const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
+  const heros = useSelector((state: RootStore) => state.heros.heros)
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
+  const filter = heros?.filter((e) => {
+    return likedData ? likedData.includes(e.id) : null
+  })
 
-  useEffect(() => {
-    // dispatch(getLikedHeros(likedItemsId))
-  }, [])
+  console.log(filter);
+  
+
+  // useEffect(() => {
+  //   dispatch(getLikedHeros())
+  // }, [])
 
   return (
     <Accordion
@@ -50,10 +60,28 @@ const LikedHeros = () => {
         </div>
       </AccordionSummary>
       <AccordionDetails>
-        Hola
+        <div className={st.cards_container}>
+          {
+            filter?.map((e: any) => {
+              const stats: object = e.powerstats
+              const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
+              const num = parseFloat(strength)
+              return < HeroItem key={e.id} id={e.id} image={e.images?.md} name={e.name} realName={e.biography?.fullName} strength={num} />
+            })}
+
+        </div>
       </AccordionDetails>
     </Accordion>
   )
 }
 
 export default LikedHeros
+
+// {
+//   likedItems(likedItemsId).map((e: any) => {
+//     const stats: object = e.powerstats
+//     const strength = (Object.values(stats).reduce((a, b) => a + b, 0) / 60).toFixed(2)
+//     const num = parseFloat(strength)
+//     return <HeroItem key={e.id} id={e.id} image={e.images?.md} name={e.name} realName={e.biography?.fullName} strength={num} />
+//   })
+// }

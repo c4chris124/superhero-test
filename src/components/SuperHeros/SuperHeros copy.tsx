@@ -10,7 +10,7 @@ import React from "react";
 
 const SuperHeros = () => {
     const herostate = useSelector((state: RootStore) => state.heros.heros)
-    const loading = useSelector((state: RootStore) => state.heros.loading)
+    const loading = useSelector((state: RootStore) => state.heros.loading)   
     const [searchTerm, setsearchTerm] = useState('')
     const [searchRedults, setSearchResults] = useState([])
 
@@ -61,5 +61,5 @@ const SuperHeros = () => {
     )
 }
 
-export default SuperHeros
+export default React.memo(SuperHeros)
 
