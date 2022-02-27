@@ -1,4 +1,4 @@
-import { HeroDispatchTypes, HEROS_FAIL, HEROS_SUCCESS, LOADING_HEROS, GET_LIKED_HEROS, ADD_LIKED_HERO} from './actionTypes'
+import { HeroDispatchTypes, HEROS_FAIL, HEROS_SUCCESS, LOADING_HEROS, GET_LIKED_HEROS, ADD_LIKED_HERO, REMOVED_LIKED_HEROS} from './actionTypes'
 import { api } from '../../credentials'
 import { Dispatch } from 'redux'
 import axios from 'axios'
@@ -30,6 +30,16 @@ export const addLikedHeros = (payload: Array<number>) => {
     return (dispatch: Dispatch<HeroDispatchTypes>) => {
         dispatch({
             type: ADD_LIKED_HERO,
+            payload
+        })
+    }
+}
+
+export const removeLikedHeros = (payload: number) => {
+
+    return (dispatch: Dispatch<HeroDispatchTypes>) => {
+        dispatch({
+            type: REMOVED_LIKED_HEROS,
             payload
         })
     }
