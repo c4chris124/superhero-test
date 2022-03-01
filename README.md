@@ -1,46 +1,28 @@
-# Getting Started with Create React App
+# Super Heros - Front-end
+Single Web Application using TypeScritp and React JS <br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Run this proyect
+Run [NPM Install]
+<br/>
+then you will need to run [NPM start]
+<hr>
 
-## Available Scripts
+This application is a list of superheroes that allows to search and select favorites using the information
+from https://akabab.github.io/superhero-api/api/all.json . It has two important
+sections, the favorites list, and the general list.
 
-In the project directory, you can run:
+• While the information is being fetched, a loading interface is being displayed with react-content-loader.<br>
+• When the collapse button is clicked the favorite superheores is being hidden.<br>
+• When a card of the favorites list is clicked, it is removed from there and be added
+  back to the general list. This process is inverse for a card in the general list. <br>
+• When a superhero is added as favorite, the app scrolls up to that recently added card. <br>
+  Besides this, the card is marked to differentiate which is the last one. Is always
+  added as the last element. <br>
+• The favorites is restored when the application is reloaded, the favorites is only a list of the superhero identifiers [1,25,34]. <br>
+• The general list has a fixed height which is always less than the window height
+  and render only what is being seen with react-window and Autosizer. <br>
+• The search box can search by name and real name in the general list, also information is being display during each key event. <br>
+• The application is full responsive. <br>
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Results
+<img alt="landingVideogame" src="./captures/app.png" >
