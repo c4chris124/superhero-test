@@ -101,7 +101,7 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
                 <Grid
                     columnCount={grid.columns}
                     columnWidth={width / grid.columns}
-                    height={610}
+                    height={height}
                     rowCount={Math.ceil(len / grid.columns)}
                     overscanRowCount={20}
                     rowHeight={205}
