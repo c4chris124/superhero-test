@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import st from './SearchBar.module.css'
 import searchIcon from '../../assets/search/search.svg'
 import cancel from '../../assets/cancel/cancel.svg'
@@ -7,7 +7,6 @@ import { RootStore } from '../../state/store/store'
 
 
 const SearchBar = (props:any) => {
-  const dispatch = useDispatch()
   const herostate = useSelector((state: RootStore) => state.heros.heros)
   const [input, setInput] = useState("")
   const inputField = React.useRef() as React.MutableRefObject<HTMLInputElement>;

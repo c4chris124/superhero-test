@@ -4,18 +4,15 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import smallHeart from '../../assets/small-heart/small-heart.svg'
 import st from './LikedHeros.module.css'
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { RootStore } from '../../state/store/store';
 import HeroItem from '../HeroItem/HeroItem';
 import bigHeart from '../../assets/big-heart/big-heart.svg'
-import { HeroType } from '../../state/actions/actionTypes';
 
 
 const LikedHeros = () => {
-  const dispatch = useDispatch()
   const [expanded, setExpanded] = useState<string | false>(false)
-  const [likedHeros, setLikedHeros] = useState <Array<HeroType | undefined>>()
   const likedData = useSelector((state: RootStore) => state.heros.likedHeros)
   const heros = useSelector((state: RootStore) => state.heros.heros)
 

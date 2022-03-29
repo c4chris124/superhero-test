@@ -5,8 +5,6 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import HeroItem from "../HeroItem/HeroItem";
 import { FixedSizeGrid as Grid } from "react-window";
-import st from './SuperHeros.module.css'
-import React from 'react';
 
 const getLocalItems = () => {
     let likedItems = localStorage.getItem('likedItems')
@@ -33,7 +31,7 @@ const HeroGrid = ({ items }: ItemCardGridProps) => {
     useEffect(() => {
         dispatch(addLikedHeros(getLocalItems()))
         localStorage.setItem('likedItems', JSON.stringify(likedItems))
-    }, [likedItems])
+    }, [likedItems, dispatch])
 
     type CellProps = {
         id: number
