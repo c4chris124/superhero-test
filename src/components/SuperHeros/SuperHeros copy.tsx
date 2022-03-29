@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState }  from "react";
+import { useEffect, useState }  from "react";
 import { useSelector } from "react-redux"
 import { RootStore } from '../../state/store/store';
 import LoaderCardsContainer from "../LoaderCards/LoaderCardsContainer";
